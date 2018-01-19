@@ -1,14 +1,67 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
   <head>
-    <title>Name</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+
+    <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
   <body>
+    <header class="head">
+      <section class="title" >
+        <h1 class="title_name">NAME</h1>
+      </section>
+      <div id="slidemenu">
+        <ul class="nav navbar-nav navbar-right" >
+          <% if user_signed_in? %>
+            <li class="log_out">
+              <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+            </li>
+            <li class="form">
+              <%= link_to '投稿フォーム', new_item_path %>
+            </li>
+            <li class="home">
+              <%= link_to "ホーム", items_path %>
+            </li>
+          <% else %>
+            <li class="sign_up">
+              <%= link_to "新規登録", new_user_registration_path %>
+            </li>
+            <li class="log_in">
+              <%= link_to "ログイン", new_user_session_path %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </header>
     <%= yield %>
+    <footer class="under">
+      <% if user_signed_in? %>
+          <li class="log_out2">
+            <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+          </li>
+          <li class="form2">
+            <%= link_to '投稿フォーム', new_item_path %>
+          </li>
+          <li class="home2">
+            <%= link_to "ホーム", items_path %>
+          </li>
+        <% else %>
+          <li class="sign_up2">
+            <%= link_to "新規登録", new_user_registration_path %>
+          </li>
+          <li class="log_in2">
+            <%= link_to "ログイン", new_user_session_path %>
+          </li>
+          
+        <% end %>
+    </footer>
   </body>
 </html>

@@ -13,3 +13,19 @@
  *= require_tree .
  *= require_self
  */
+.head {
+padding: 20px ;
+background-color: black;
+}
+.title_name {
+	text-align: center;
+	margin-top: 50px;
+	color: white;
+}
+ .form .home .sign_up .log_in {
+ 	float: left;
+}
+.under {
+	background-color: black;
+	height: 100px;
+}

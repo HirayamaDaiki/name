@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+
+   <title>name</title>
+  </head>
+  <body>
+    <div class="post-meta-top">
+      <div class="post-image">
+        <%= attachment_image_tag @item, :image %>
+      </div>
+    </div>
+    <div class="post-content">
+        <h2 class="post-title"><%= @item.item_name %></h2>
+        <ul class="meta-info-cells v4 float-wrapper">
+        <li>
+          <i class="fa fa-user"></i>By
+          <a href="#"><%= @item.user.name %></a>
+        </li>
+        <li>
+          <i class="fa fa-calendar"></i><%= @item.created_at.strftime('%Y/%m/%d') %>
+        </li>
+        <li>
+          <i class="fa fa-heart"></i>
+          <a href="#">202 いいね</a>
+        </li>
+        <li>
+          <i class="fa fa-comment"></i>
+          <a href="#comments">コメント数 <%= @item.reviews.count %></a>
+        </li>
+        </ul>
+        <%= form_for [@item, @review] do |f| %>
+            <div class="row">
+                <div class="col-sm-12">
+                    <%= f.text_field :comment, class: "form-control",placeholder: "コメントをここに" %>
+                </div>
+            </div>
+            <%= f.submit "送信する", class: "btn btn-lg btn-base-1 mt-20 pull-right" %>
+        <% end %>
+        <ol style = "list-style: none;">
+            <% @item.reviews.each do |review| %>
+                <li class="comment">
+                    <div class="comment-body bb">
+                        <div class="comment-avatar">
+                        </div>
+                        <div class="comment-text">
+                            <div class="comment-author clearfix">
+                                <span class="comment-meta">
+                                  <span class="comment-date"><%= review.created_at.strftime('%Y/%m/%d') %></span>
+                                </span>
+                            </div>
+                            <span><%= review.comment %></span>
+                        </div>
+                    </div>
+                </li>
+                <li><%= link_to "削除", item_reviews_path(review.item),method: :delete%>
+                </li>
+            <% end %>
+        </ol>
+    </div>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
+  </body>
+</html>
